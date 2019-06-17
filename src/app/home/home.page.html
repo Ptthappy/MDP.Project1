@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Peterest
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let img of images">
+    <ion-card>
+      <ion-card-header>
+        <ion-title>{{img.type}}</ion-title>
+      </ion-card-header>
+      <ion-img src={{img.src}}></ion-img>
+    </ion-card>
+  </ion-list>
+</ion-content>
