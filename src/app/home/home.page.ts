@@ -19,39 +19,58 @@ export class HomePage {
 
     toggleSearch() {
         this.x = !this.x;
+
+        if(!this.x) {
+            this.filter='';
+        }
     }
 
     loadData(event) {
         setTimeout(() => {
-            console.log('Done');
-            event.target.complete();
+            for (let i = 0; i < 5; i++) {
+                if(this.images.length === 0) {
+                    break;
+                }
 
-            // App logic to determine if all data is loaded
-            // and disable the infinite scroll
-            if (this.images.length === 0) {
+                this.results.push(this.images.pop());
+            }
+            event.target.complete();
+            if(this.images.length === 0) {
                 event.target.disabled = true;
             }
+            // App logic to determine if all data is loaded
+            // and disable the infinite scroll
+            // if (this.images.length === 0) {
+            //     event.target.disabled = true;
+            // }
         }, 500);
     }
 
-    getResults() {
-        console.log(this.filter);
-        if (this.filter === '') {
-            return this.images;
-        } else {
-            const images = [];
-            for (let img of this.images) {
-                if (img.type.toLowerCase().includes(this.filter.toLowerCase()) || img.name.toLowerCase().includes(this.filter.toLowerCase())) {
-                    console.log(img.src);
-                    images.push(img);
-                }
-            }
-            return images;
+    // getResults() {
+    //     console.log(this.filter);
+    //     if (this.filter === '') {
+    //         return this.images;
+    //     } else {
+    //         const images = [];
+    //         for (let img of this.images) {
+    //             if (img.type.toLowerCase().includes(this.filter.toLowerCase()) || img.name.toLowerCase().includes(this.filter.toLowerCase())) {
+    //                 console.log(img.src);
+    //                 images.push(img);
+    //             }
+    //         }
+    //         return images;
+    //     }
+    // }
+
+    initialize() {
+        for (let i = 0; i < 5; i++) {
+            this.results.push(this.images.pop());
         }
     }
 
     constructor(private router: Router) {
         this.filter = '';
+        this.resetResults();
     }
 
     resetResults() {
@@ -113,5 +132,6 @@ export class HomePage {
         this.images.push({ src: '/assets/chibi/5.jpg', name: 'Shy Guy más cuchi todavía', type: 'chibi' });
 
         this.results = [];
+        this.initialize();
     }
 }
