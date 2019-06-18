@@ -1,25 +1,38 @@
-<ion-header>
-  <ion-toolbar color="dark">
-    <ion-buttons slot="primary">
-      <ion-button (click)="this.setFilter('8-bit')">
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-searchbar animated></ion-searchbar>
-    <ion-title>
-      Peterest
-    </ion-title>
-  </ion-toolbar>
+<ion-header *ngIf="!this.x">
+    <ion-toolbar color="dark">
+        <ion-buttons slot="primary">
+            <ion-button (click)="this.toggleSearch()">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="!this.x">
+            Peterest
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="this.x">
+    <ion-searchbar animated [(ngModel)]="filter" showCancelButton></ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <!--*ngIf="filter==='' || filter===img.type || filter===img.name"-->
-  <ion-list *ngFor="let img of getResults()">
-    <ion-card>
-      <ion-card-header>
-        <ion-title>{{img.type}}</ion-title>
-      </ion-card-header>
-      <ion-img src={{img.src}}></ion-img>
-    </ion-card>
-  </ion-list>
+    <ion-button (click)="navigate('profile')">Go to profile</ion-button>
+    <!--<ion-list *ngFor="let img of getResults()">-->
+        <!--<ion-card color="dark" button (click)="setFilter('chibi')">-->
+            <!--<ion-card-header>-->
+                <!--<ion-title>{{img.type}}</ion-title>-->
+            <!--</ion-card-header>-->
+            <!--<ion-img src={{img.src}}></ion-img>-->
+            <!--<ion-card-header>-->
+                <!--<ion-card-subtitle>Name: {{img.name}}</ion-card-subtitle>-->
+            <!--</ion-card-header>-->
+        <!--</ion-card>-->
+    <!--</ion-list>-->
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
