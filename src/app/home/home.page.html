@@ -17,7 +17,10 @@
 </ion-header>
 
 <ion-header *ngIf="this.x">
-    <ion-searchbar animated [(ngModel)]="filter" showCancelButton (ionCancel)="toggleSearch()"></ion-searchbar>
+    <ion-searchbar animated showCancelButton
+                   [(ngModel)]="filter" (ionCancel)="toggleSearch()"
+                    (ionChange)="getResults()" placeholder="Find images">
+    </ion-searchbar>
 </ion-header>
 
 

@@ -46,31 +46,37 @@ export class HomePage {
         }, 500);
     }
 
-    // getResults() {
-    //     console.log(this.filter);
-    //     if (this.filter === '') {
-    //         return this.images;
-    //     } else {
-    //         const images = [];
-    //         for (let img of this.images) {
-    //             if (img.type.toLowerCase().includes(this.filter.toLowerCase()) || img.name.toLowerCase().includes(this.filter.toLowerCase())) {
-    //                 console.log(img.src);
-    //                 images.push(img);
-    //             }
-    //         }
-    //         return images;
-    //     }
-    // }
+    getResults() {
+        this.resetResults();
+        let images = [];
+        if (this.filter !== '') {
+            for (let i = 0; i < this.images.length; i++) {
+                if (this.images[i].type.toLowerCase().includes(this.filter.toLowerCase()) ||
+                    this.images[i].name.toLowerCase().includes(this.filter.toLowerCase()) ) {
+                    images.push(this.images[i]);
+                }
+            }
+            this.images = images;
+        }
+        this.initialize();
+    }
 
     initialize() {
-        for (let i = 0; i < 5; i++) {
-            this.results.push(this.images.pop());
+        if(this.images.length === 0) {
+            return;
+        } else {
+            for (let i = 0; i < 5; i++) {
+                this.results.push(this.images.pop());
+                if (this.images.length === 0)
+                    break;
+            }
         }
     }
 
     constructor(private router: Router) {
         this.filter = '';
         this.resetResults();
+        this.initialize();
     }
 
     resetResults() {
@@ -132,6 +138,5 @@ export class HomePage {
         this.images.push({ src: '/assets/chibi/5.jpg', name: 'Shy Guy más cuchi todavía', type: 'chibi' });
 
         this.results = [];
-        this.initialize();
     }
 }
