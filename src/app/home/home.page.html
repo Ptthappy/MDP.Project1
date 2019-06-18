@@ -1,5 +1,5 @@
 <ion-header *ngIf="!this.x">
-    <ion-toolbar color="dark">
+    <ion-toolbar color="light">
         <ion-buttons slot="end">
             <ion-button (click)="this.toggleSearch()">
                 <ion-icon slot="icon-only" name="search"></ion-icon>
@@ -26,14 +26,14 @@
 
 <ion-content>
     <ion-list *ngFor="let img of results">
-        <ion-card color="dark">
+        <ion-card color="light">
             <ion-card-header>
                 <ion-title>{{img.type}}</ion-title>
             </ion-card-header>
-            <ion-img src={{img.src}}></ion-img>
-            <ion-card-header>
-                <ion-card-subtitle>Name: {{img.name}}</ion-card-subtitle>
-            </ion-card-header>
+            <img src={{img.src}}>
+            <ion-card-content>
+                <p>Name: {{img.name}}</p>
+            </ion-card-content>
         </ion-card>
     </ion-list>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

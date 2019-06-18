@@ -19,8 +19,9 @@ export class HomePage {
 
     toggleSearch() {
         this.x = !this.x;
-
+        this.filter = '';
         if(!this.x) {
+            this.getResults();
             this.filter='';
         }
     }
@@ -35,9 +36,9 @@ export class HomePage {
                 this.results.push(this.images.pop());
             }
             event.target.complete();
-            if(this.images.length === 0) {
-                event.target.disabled = true;
-            }
+            // if(this.images.length === 0) {
+            //     event.target.disabled = true;
+            // }
             // App logic to determine if all data is loaded
             // and disable the infinite scroll
             // if (this.images.length === 0) {

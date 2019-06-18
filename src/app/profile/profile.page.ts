@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular'
 
 @Component({
   selector: 'app-profile',
@@ -14,21 +13,7 @@ export class ProfilePage implements OnInit {
     this.router.navigate([route]);
   }
 
-  constructor(private router: Router, private menu: MenuController) { }
-
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
-  }
-
-  openEnd() {
-    this.menu.open('end');
-  }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
-  }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
