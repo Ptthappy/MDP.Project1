@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-    images: Array<object> = [];
-    results: Array<object> = [];
+    images: Array<any> = [];
+    results: Array<any> = [];
     x: boolean;
     filter: string;
 
@@ -36,24 +36,16 @@ export class HomePage {
                 this.results.push(this.images.pop());
             }
             event.target.complete();
-            // if(this.images.length === 0) {
-            //     event.target.disabled = true;
-            // }
-            // App logic to determine if all data is loaded
-            // and disable the infinite scroll
-            // if (this.images.length === 0) {
-            //     event.target.disabled = true;
-            // }
         }, 500);
     }
 
     getResults() {
         this.resetResults();
         let images = [];
-        if (this.filter !== '') {
+        if (this.filter.trim() !== '') {
             for (let i = 0; i < this.images.length; i++) {
-                if (this.images[i].type.toLowerCase().includes(this.filter.toLowerCase()) ||
-                    this.images[i].name.toLowerCase().includes(this.filter.toLowerCase()) ) {
+                if (this.images[i].type.toLowerCase().trim().includes(this.filter.trim().toLowerCase()) ||
+                    this.images[i].name.toLowerCase().trim().includes(this.filter.trim().toLowerCase()) ) {
                     images.push(this.images[i]);
                 }
             }
